@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Map, { Marker } from 'react-map-gl';
+import Map, { Marker } from 'react-map-gl/maplibre';
 import maplibregl from 'maplibre-gl';
 import { io } from 'socket.io-client';
 
