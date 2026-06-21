@@ -35,9 +35,17 @@ export default function CampusMap() {
 
   const [liveNodes, setLiveNodes] = useState({});
   const socketRef = useRef(null);
+  const [webGLSupported, setWebGLSupported] = useState(true);
 
   useEffect(() => {
-    socketRef.current = io(process.env.NEXT_PUBLIC_WS_URL);
+    if (!maplibregl.supported()) {
+      setWebGLSupported(false);
+      return;
+    }
+
+    socketRef.current = io(process.env.NEXT_PUBLIC_WS_URL, {
+      transports: ['websocket']
+    });
 
     socketRef.current.on('node-updated', (node) => {
       if (!node.position) return;
@@ -71,6 +79,19 @@ export default function CampusMap() {
       };
     }
   }, []);
+
+  if (!webGLSupported) {
+    return (
+      <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#1e1e1e', color: 'white', padding: '20px', textAlign: 'center' }}>
+        <h2>⚠️ WebGL is Disabled</h2>
+        <p style={{ marginTop: '10px', maxWidth: '400px', lineHeight: '1.5' }}>
+          Your browser is currently blocking Hardware Acceleration (WebGL), which is required to render the map graphics. 
+          <br /><br />
+          Please enable <b>Hardware Acceleration</b> in your browser settings, or try opening this link on your smartphone.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
