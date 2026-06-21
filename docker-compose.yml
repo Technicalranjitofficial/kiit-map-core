@@ -75,8 +75,8 @@ services:
       - ./nextjs-app:/app
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_TILE_URL=https://map-tiles.kiitconnect.com
-      - NEXT_PUBLIC_WS_URL=https://map-ws.kiitconnect.com
+      - NEXT_PUBLIC_TILE_URL=http://140.245.228.166/tiles
+      - NEXT_PUBLIC_WS_URL=http://140.245.228.166
     networks:
       - map-tier
     restart: always
