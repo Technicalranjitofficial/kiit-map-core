@@ -38,7 +38,14 @@ export default function CampusMap() {
   const [webGLSupported, setWebGLSupported] = useState(true);
 
   useEffect(() => {
-    if (!maplibregl.supported()) {
+    try {
+      const canvas = document.createElement('canvas');
+      const supported = !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+      if (!supported) {
+        setWebGLSupported(false);
+        return;
+      }
+    } catch (e) {
       setWebGLSupported(false);
       return;
     }
