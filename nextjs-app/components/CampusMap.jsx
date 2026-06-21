@@ -10,11 +10,17 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 const structuralStyle = {
   version: 8,
   sources: {
-    'campus-vector-tiles': {
+    'campus-buildings': {
       type: 'vector',
-      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/index/{z}/{x}/{y}.pbf`],
+      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/multipolygons/{z}/{x}/{y}.pbf`],
       minzoom: 0,
-      maxzoom: 18
+      maxzoom: 22
+    },
+    'campus-roads': {
+      type: 'vector',
+      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/lines/{z}/{x}/{y}.pbf`],
+      minzoom: 0,
+      maxzoom: 22
     }
   },
   layers: [
@@ -22,6 +28,30 @@ const structuralStyle = {
       id: 'background-base',
       type: 'background',
       paint: { 'background-color': '#eae8e4' }
+    },
+    {
+      id: 'campus-roads-layer',
+      type: 'line',
+      source: 'campus-roads',
+      'source-layer': 'lines',
+      filter: ['has', 'highway'],
+      paint: {
+        'line-color': '#ffffff',
+        'line-width': ['interpolate', ['linear'], ['zoom'], 14, 2, 18, 8]
+      }
+    },
+    {
+      id: 'campus-buildings-layer',
+      type: 'fill-extrusion',
+      source: 'campus-buildings',
+      'source-layer': 'multipolygons',
+      filter: ['has', 'building'],
+      paint: {
+        'fill-extrusion-color': '#d1cdc7',
+        'fill-extrusion-height': 15,
+        'fill-extrusion-base': 0,
+        'fill-extrusion-opacity': 0.9
+      }
     }
   ]
 };
