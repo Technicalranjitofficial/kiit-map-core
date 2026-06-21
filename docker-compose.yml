@@ -45,7 +45,7 @@ services:
     container_name: map-tile-server
     environment:
       - WATCH_MODE=true
-      - CONNECTION_STRING=postgresql://kiit_admin:SecureCampusAuthToken2026@postgis:5432/kiit_map_db
+      - DATABASE_URL=postgresql://kiit_admin:SecureCampusAuthToken2026@postgis:5432/kiit_map_db
     networks:
       - map-tier
     depends_on:
