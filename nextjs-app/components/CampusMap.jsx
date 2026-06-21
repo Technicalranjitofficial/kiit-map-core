@@ -12,13 +12,13 @@ const structuralStyle = {
   sources: {
     'campus-buildings': {
       type: 'vector',
-      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/multipolygons/{z}/{x}/{y}.pbf`],
+      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/multipolygons/{z}/{x}/{y}`],
       minzoom: 0,
       maxzoom: 22
     },
     'campus-roads': {
       type: 'vector',
-      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/lines/{z}/{x}/{y}.pbf`],
+      tiles: [`${process.env.NEXT_PUBLIC_TILE_URL}/lines/{z}/{x}/{y}`],
       minzoom: 0,
       maxzoom: 22
     }
