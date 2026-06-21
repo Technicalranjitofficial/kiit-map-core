@@ -41,7 +41,7 @@ services:
 
   # 3. Vector Tile Streamer
   martin-tiles:
-    image: maplibre/martin:latest
+    image: ghcr.io/maplibre/martin:latest
     container_name: map-tile-server
     environment:
       - WATCH_MODE=true
