@@ -47,10 +47,34 @@ const structuralStyle = {
       'source-layer': 'multipolygons',
       filter: ['has', 'building'],
       paint: {
-        'fill-extrusion-color': '#d1cdc7',
+        'fill-extrusion-color': [
+          'case',
+          ['==', ['get', 'building'], 'dormitory'], '#3b82f6',
+          ['==', ['get', 'building'], 'university'], '#a855f7',
+          ['==', ['get', 'amenity'], 'university'], '#a855f7',
+          '#d1cdc7'
+        ],
         'fill-extrusion-height': 15,
         'fill-extrusion-base': 0,
         'fill-extrusion-opacity': 0.9
+      }
+    },
+    {
+      id: 'campus-building-labels',
+      type: 'symbol',
+      source: 'campus-buildings',
+      'source-layer': 'multipolygons',
+      filter: ['has', 'name'],
+      layout: {
+        'text-field': ['get', 'name'],
+        'text-size': 12,
+        'text-anchor': 'center',
+        'text-justify': 'center'
+      },
+      paint: {
+        'text-color': '#1f2937',
+        'text-halo-color': '#ffffff',
+        'text-halo-width': 2
       }
     }
   ]
