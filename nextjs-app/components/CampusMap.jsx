@@ -259,6 +259,7 @@ export default function CampusMap() {
         onMove={evt => setViewport(evt.viewState)}
         mapLib={maplibregl}
         mapStyle={structuralStyleInteractive}
+        attributionControl={false}
         interactiveLayerIds={['campus-buildings-layer']}
         onMouseMove={onHover}
         onMouseLeave={() => setHoverInfo(null)}
